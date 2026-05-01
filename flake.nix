@@ -16,7 +16,8 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-
+        libcdkSource = ./Libcdk21-202604232308.tar.bz2;
+        librtsSource = ./Librts7-202604232308.tar.bz2;
       in
       {
         packages = {
@@ -30,7 +31,7 @@
               # graphviz
             ];
 
-            src = ./libcdk21-20260421.tar.bz2;
+            src = libcdkSource;
             postPatch = ''
               patchShebangs ./bin/cdk
               substituteInPlace Makefile --replace-fail "/usr" ""
@@ -51,7 +52,7 @@
               # graphviz
             ];
 
-            src = ./librts7-20260421.tar.bz2;
+            src = librtsSource;
             postPatch = ''
               substituteInPlace Makefile --replace-fail "/usr" ""
               substituteInPlace Makefile --replace-fail "\''${HOME}/compiladores/root" "$out"
