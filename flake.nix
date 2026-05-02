@@ -57,6 +57,7 @@
               substituteInPlace Makefile --replace-fail "/usr" ""
               substituteInPlace Makefile --replace-fail "\''${HOME}/compiladores/root" "$out"
             '';
+            hardeningDisable = [ "stackprotector" ];
           };
 
           applyPatches = pkgs.writeShellApplication {
@@ -91,13 +92,15 @@
               yasm
               gnumake
               libxml2
+              gcc_multi
+              glibc_multi
             ]
             ++ (with self.packages.${system}; [
               libcdk
               librts
             ]);
 
-          shellHook = "";
+          # shellHook = "";
         };
       }
     );
